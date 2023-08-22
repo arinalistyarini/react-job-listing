@@ -26,32 +26,30 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <div className="max-w-[1000px] pt-8 px-4 mx-auto">
-        <Filter
-          currentData={data}
-          setData={setData}
-          setHasNext={setHasNext}
-          page={currentPage}
-          setPage={setCurrentPage}
-          setUseSpinner={setUseSpinner}
-        />
+    <div className="main-page">
+      <Filter
+        currentData={data}
+        setData={setData}
+        setHasNext={setHasNext}
+        page={currentPage}
+        setPage={setCurrentPage}
+        setUseSpinner={setUseSpinner}
+      />
 
-        <div className="mt-6">
-          <h2 className="text-4xl font-extrabold mb-4">Job list</h2>
-          <div className="divide-y">
-            {
-              (currentPage === 1 && useSpinner)
-                ? null
-                : data.map((item, index) => <JobItem data={item} key={index} />)
-            }
-          </div>
-          <div className="mb-4">
-            <MoreJobsButton />
-          </div>
-          <Spinner isShown={useSpinner} />
+      <div className="mt-6">
+        <h2 className="text-4xl font-extrabold mb-4">Job list</h2>
+        <div className="divide-y">
+          {
+            (currentPage === 1 && useSpinner)
+              ? null
+              : data.map((item, index) => <JobItem data={item} key={index} />)
+          }
         </div>
+        <div className="mb-4">
+          <MoreJobsButton />
+        </div>
+        <Spinner isShown={useSpinner} />
       </div>
-    </main>
+    </div>
   )
 }

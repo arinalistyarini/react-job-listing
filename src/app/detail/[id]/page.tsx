@@ -8,7 +8,7 @@ import CompanyLink from '@/app/components/CompanyLink'
 import Spinner from '@/app/components/Spinner'
 
 
-export default function Detail({ params }) {
+export default function Detail({ params }: { params: { id: string } }) {
   const id = params.id
   const [data, setData] = useState({} as Record<string, any>)
   const [useSpinner, setUseSpinner] = useState(true)
@@ -48,51 +48,49 @@ export default function Detail({ params }) {
   }
 
   return (
-    <main>
-      <div className="max-w-[1000px] pt-8 px-4 mx-auto">
-        <Spinner isShown={useSpinner} />
-        { useSpinner
-          ? null
-          : <>
-            <Link href="/" className='text-indigo-600 hover:underline'>
-              &lt; Back to list
-            </Link>
-            <div className="mt-8">
-              <div className="flex">
-                <div className="w-[calc(100%-200px)] pr-8">
-                  <section>
-                    <div className="text-grey-500 mb-5">
-                      {data.type} / {data.location}
-                    </div>
-                    <h2 className="text-4xl font-extrabold mb-4">
-                      {data.title}
-                    </h2>
-                  </section>
-                  <div className="divide-y">
-                    <section className="pt-6 pb-6 mt-6">
-                      <h3 className="text-xl font-extrabold mb-4">
-                        Description
-                      </h3>
-                      <div dangerouslySetInnerHTML={{__html: data.description}} />
-                    </section>
-                    <section className="pt-6 pb-6 mt-6">
-                      <h3 className="text-xl font-extrabold mb-4">
-                        How to Apply
-                      </h3>
-                      <div dangerouslySetInnerHTML={{__html: data.how_to_apply}} />
-                    </section>
+    <div className="detail-page">
+      <Spinner isShown={useSpinner} />
+      { useSpinner
+        ? null
+        : <>
+          <Link href="/" className='text-indigo-600 hover:underline'>
+            &lt; Back to list
+          </Link>
+          <div className="mt-8">
+            <div className="flex">
+              <div className="w-[calc(100%-200px)] pr-8">
+                <section>
+                  <div className="text-grey-500 mb-5">
+                    {data.type} / {data.location}
                   </div>
-                </div>
-                <div className="w-[200px]">
-                  <CompanyLink companyUrl={data.company_url} companyName={data.company} />
-                  <CompanyImage />
-                  <ApplyLink />
+                  <h2 className="text-4xl font-extrabold mb-4">
+                    {data.title}
+                  </h2>
+                </section>
+                <div className="divide-y">
+                  <section className="pt-6 pb-6 mt-6">
+                    <h3 className="text-xl font-extrabold mb-4">
+                      Description
+                    </h3>
+                    <div dangerouslySetInnerHTML={{__html: data.description}} />
+                  </section>
+                  <section className="pt-6 pb-6 mt-6">
+                    <h3 className="text-xl font-extrabold mb-4">
+                      How to Apply
+                    </h3>
+                    <div dangerouslySetInnerHTML={{__html: data.how_to_apply}} />
+                  </section>
                 </div>
               </div>
+              <div className="w-[200px]">
+                <CompanyLink companyUrl={data.company_url} companyName={data.company} />
+                <CompanyImage />
+                <ApplyLink />
+              </div>
             </div>
-          </>
-        }
-      </div>
-    </main>
+          </div>
+        </>
+      }
+    </div>
   )
 }
